@@ -8,7 +8,7 @@ Version control is a way of recording changes to documents.  It's important for 
 
 * What is a branch and why would you use one?
 
-A branch is a duplicate set of files created for the purpose of making changes.  A programmer can make changes to files in the branch, and then later merge them back into the master version of the files.
+A branch is a duplicate set of files created for the purpose of making changes.  A programmer can modify files in the branch, and then later merge them back into the master version of the files.
 
 The purpose of using branches is to make sure people don't make changes directly to the master version of files, which could result in all sorts of problems (like unrecorded or incompatible changes).  Making changes to branches and then requiring approval for merger helps keep the master versions of the files clear.
 
