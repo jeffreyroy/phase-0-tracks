@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Practice Form</title>
+</head>
+<body>
+	<form name="practice" action="success.html" method="post">
+		<div>
+			<label>Name:</label>
+			<input type="text" name="name" placeholder="Name here" />
+		</div>
+		<div>
+			<label>Password:</label>
+			<input type="password" name="password" />
+		</div>
+		<div>
+			<label>Date of Birth:</label>
+			<input type="date" name="dob" />
+		</div>
+		<div>
+			<p>
+				<label>What is your favorite web browser?</label>
+				<select name="browser">
+					<option value="chrome">Chrome</option>
+					<option value="firefox">Firefox</option>
+					<option value="explorer">Explorer</option>
+					<option value="safari">Safari</option>
+				</select>
+			</p>
+		</div>
+		<div>
+			<p>
+				<label>Why do you prefer this browser?</label><br />
+				<textarea name="preference" rows="5" cols="40">
+					Enter your comments here.
+				</textarea>
+			</p>
+		</div>
+		<div>
+			<button type="submit">Submit</button>
+		</div>
+
+	</form>
+</body>
+</html>
