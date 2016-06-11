@@ -4,14 +4,27 @@ blockquote {
   margin-left: 0px;
 }
 
+body {
+  width: 960px;
+}
+
 cite {
   display: block;
   margin-top: 10px;
 }
 
-#external-links ul {
+#external-links {
   list-style-type: none;
   padding-left: 0px;
+  display: inline-block;
+  width: 200px;
+  vertical-align: top;
+}
+
+main {
+  display: inline-block;
+  width: 756px;
+  vertical-align: top;
 }
 
 /* you're welcome to edit the

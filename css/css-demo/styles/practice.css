@@ -1,0 +1,26 @@
+.small-font {
+	font-size: .8em;
+}
+
+.job {
+	background-color: #e9e5dc;
+	border-radius: 25px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+li:hover {
+	background-color: yellow;
+}
+
+section section {
+	background-color: blue;
+}
+
+ul {
+	font-size: .8em;
+}
