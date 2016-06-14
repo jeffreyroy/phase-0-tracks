@@ -1,0 +1,31 @@
+body {
+  background: yellow;
+}
+header h1{
+  text-align: center;
+  font-family: Verdana;
+  font-variant: small-caps;
+  border:3px solid red;
+}
+
+.column-1 {
+  padding:10px;
+  width: 45%;
+  display: inline-block;
+  vertical-align: top;
+  background: red;
+}
+
+.column-2 {
+  padding: 10px;
+  width: 45%;
+  display: inline-block;
+  vertical-align: top;
+  background: red;
+}
+
+footer {
+  margin-top: 20px;
+  text-align: center;
+  
+}
