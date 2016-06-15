@@ -1,0 +1,23 @@
+- press the call button
+- until doors open or ten minutes has passed
+	- wait five seconds
+- if ten minutes has passed and the door hasn't opened
+	- return with an "elevator broken" message
+- enter the elevator
+- set n equal to the desired floor
+- look at the bottom left floor button
+ (current button is the button the robot is currently viewing)
+- until the current button is greater than n, or you've gone beyond the top of the floor buttons
+	- go up one row
+- go down one row
+- until the current button equals n, or you've gone beyond the right edge of the floor buttons
+	- go right one column
+- if you've gone beyond the right edge of the floor buttons
+	- press the open door button
+	- leave the elevator
+	- return with a "floor not found" error
+- press the button you're currently viewing
+- until the door opens
+	- wait 5 seconds
+- leave the elevator
+- return a "success" message
