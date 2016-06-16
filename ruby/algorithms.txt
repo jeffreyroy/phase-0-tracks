@@ -1,3 +1,5 @@
+1.  Robot algorithm
+
 - press the call button
 - until doors open or ten minutes has passed
 	- wait five seconds
@@ -21,3 +23,56 @@
 	- wait 5 seconds
 - leave the elevator
 - return a "success" message
+
+2. Cooking breakfast alorithm
+
+- Cook oatmeal method
+	- If oatmeal in bin < 1/2 cup
+		- Return "not enough oatmeal" error
+	- Get saucepan from cupboard
+	- Put saucepan on unit 1 of stove
+	- Get measuring cup from drawer
+	- Measure 1/2 cup oatmeal from bin
+	- Put oatmeal into saucepan
+	- Turn on faucet
+	- Measure 1 cup water from faucet
+	- Turn off faucet
+	- Put water in saucepan
+	- If raisins >= 1/4 cup
+		- Measure 1/4 cup raisins
+		- Put raisins in pan
+	- Turn unit 1 to high
+	- Until water boiling
+		- Wait 10 seconds
+	- Turn unit 1 to low
+	- Wait 10 minutes
+	- Turn unit 1 off
+	- Return "success" message
+
+- Cook eggs method
+	- If oil = 0
+		- Return "No oil" error
+	- Open fridge
+	- If eggs in fridge = 0
+		- Return "No eggs" error
+	- Get egg from fridge
+	- Close fridge
+	- Get frying pan from cupboard
+	- Put frying pan on unit 2 of stove
+	- Put 1 tbsp oil in pan
+	- Turn unit 2 to high
+	- Until oil hot
+		- Wait 10 seconds
+	- Turn unit 2 to medium
+	- Crack egg into pan
+	- Wait 2 minutes
+	- Turn unit 2 off
+	- Remove pan from stove
+	- Return "success" message
+
+- Main
+	- Open oatmeal bin
+	- If oatmeal in bin >= 1/2 cup
+		- Call cook oatmeal method
+	- If eggs in fridge > 0
+		- Call cook eggs method
