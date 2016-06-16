@@ -14,14 +14,30 @@ def check_age(age, year)
 	end
 end
 
+# Get number of employees
+employees = 0
+puts
+puts "Welcome to Werewolf, Inc."
+while employees == 0
+	puts
+	print "How many employees will be processed? "
+	employees = gets.chomp.to_i
+end
+
+
+# Main loop
+for a in 1..employees
+
 # initialize variables
 name = ""
 age = 0
 birth_year = 0
 garlic = ""
 insurance = ""
+allergies = ""
 
 # questionnaire
+puts
 puts "Thank you for applying to Werewolf, Inc."
 while name == ""
 	puts
@@ -54,6 +70,13 @@ while insurance != "y" and insurance != "n"
 	insurance = gets.chomp.downcase
 end
 
+puts
+puts "Please list any allergies you have.  Enter \"done\" when done."
+while allergies != "done" && allergies != "sunshine"
+	print "Enter an allergy: "
+	allergies = gets.chomp.downcase
+end
+
 # vampire check
 vampirosity = 0
 vampire_names = ["dracula", "lestat", "nosferatu", "drake cula", "tu fang"]
@@ -79,7 +102,17 @@ if vampire_names.index( name )
 	vampirosity = 5
 end
 
+if allergies == "sunshine"
+	vampirosity = 5
+end
+
 # Print result
 print "Result: "
 puts results[vampirosity]
+
+# End of main loop
+end
+
+puts
+puts "Actually, never mind! What do these questions have to do with anything? Let's all be friends."
 
