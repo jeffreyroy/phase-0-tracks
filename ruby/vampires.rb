@@ -49,12 +49,20 @@ while age == 0
 	puts
 	print "How old are you? "
 	age = gets.chomp.to_i
+	if age < 0
+		puts "Are you trying to tell me you haven't been born yet?"
+		age = 0
+	end
 end
 
 while birth_year == 0
 	puts
 	print "What year were you born? "
 	birth_year = gets.chomp.to_i
+	if birth_year > 2017
+		puts "Are you trying to tell me you haven't been born yet?"
+		birth_year = 0
+	end
 end
 
 while garlic != "y" and garlic != "n"
@@ -107,6 +115,7 @@ if allergies == "sunshine"
 end
 
 # Print result
+puts
 print "Result: "
 puts results[vampirosity]
 
