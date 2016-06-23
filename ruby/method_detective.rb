@@ -4,19 +4,33 @@
 # When there's more than one suspect who could have
 # committed the crime, add additional calls to prove it.
 
-# "iNvEsTiGaTiOn".<???>
+# WARNING--
+# The notorious criminals ".replace" and ".sub" could have committed every
+# crime in this list!  Recommend immediate apprehension.
+# Here is an example of their versatility:
+
+p "same".replace("different")
+p "same".sub("same", "different")
+p "same".gsub("same", "different")
+
+# I'll omit these shapeshifters from the rest of my analysis.
+
+p "iNvEsTiGaTiOn".swapcase
+
 # => “InVeStIgAtIoN”
 
-# "zom".<???>
+p "zom".insert(1, "o")
 # => “zoom”
 
-# "enhance".<???>
+p "enhance".center(15)
 # => "    enhance    "
 
-# "Stop! You’re under arrest!".<???>
+puts "Stop! You’re under arrest!".upcase
 # => "STOP! YOU’RE UNDER ARREST!"
 
-# "the usual".<???>
+p "the usual".concat("suspects")
+p "the usual".insert(9, "suspects")
+
 #=> "the usual suspects"
 
 # " suspects".<???>
