@@ -68,7 +68,7 @@ if key_string != "none"
 	# Get new value for key
 	print "Enter new value for #{key_string}: "
 	value = gets.chomp
-	# Assign new value to key
+	# Assign new value to key using appropriate variable type
 	case key
 	when :fn
 		client[:fn] = value
