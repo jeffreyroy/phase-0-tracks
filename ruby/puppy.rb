@@ -1,4 +1,4 @@
-# Class puppy
+# class Puppy
 #
 # Characteristics of a puppy:
 # 	Name: string
@@ -14,4 +14,5 @@
 # 	Stand up
 
 class Puppy
+	# To be filled in in later exercises
 end
