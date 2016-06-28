@@ -29,6 +29,17 @@ class Santa
 	def favorite_reindeer
 		@reindeer_ranking[0]
 	end
+	# getter and setter methods not needed because of shortcuts above
+	# def age
+		# @age
+	# end
+	# def ethnicity
+		# @ethnicity
+	# end
+	# def gender=(new_gender)
+		# @gender = new_gender
+	# end
+
 end
 
 # Test it out with some specific Santas
