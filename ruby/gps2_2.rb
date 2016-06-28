@@ -96,3 +96,35 @@ update_quantity(groceries, "Ice Cream", 1)
 # Print list
 print_list(groceries)
 
+# Reflection
+
+# 1. What did you learn about pseudocode from working on this challenge?
+#
+# I learned that the purpose of pseudocode is to provide an outline of steps
+# that can be implemented in any language.
+#
+# 2. What are the tradeoffs of using arrays and hashes for this challenge?
+#
+# A hash was better for this challenge because it involves paired data sets
+# (an item and a corresponding quantity).  Using arrays would have required two
+# separate arrays for items and quantities, which would have been more complicated.
+#
+# 3. What does a method return?
+#
+# A method returns the value of the last statement executed,
+# or the value specified in a 'return' statement if there is one.
+#
+# 4. What kind of things can you pass into methods as arguments?
+#
+# I believe any variables can be passed as arguments, including strings, arrays, hashes, and so on.
+#
+# 5. How can you pass information between methods?
+#
+# Usually you'd pass information using arguments.  In theory global variables could be used,
+# but global variables are usually avoided in favor of local variables.
+#
+# 6. What concepts were solidified in this challenge, and what concepts are still confusing?
+#
+# I'm still confused about how specific pseduocoding needs to be.  For example, should we
+# use variable names?  Can we use built-in Ruby methods?  If we can't use built-in methods
+# in pseudocode, do we need to specify all the steps that would be performed by a built-in method?
