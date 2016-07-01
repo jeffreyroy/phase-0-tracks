@@ -1,3 +1,4 @@
+# Release 0
 # Define monster class
 #
 # Attributes:
@@ -12,6 +13,7 @@
 # take_damage(damage=integer) = monster takes damage
 # die = monster dies
 
+# Release 1 - Implement the class
 class Monster
 	attr_reader :name, :damage
 	attr_accessor :health
@@ -35,15 +37,18 @@ class Monster
 	def take_damage(damage)
 		@health -= damage
 	end
+	# die print out death message for monster
 	def die
 		"The #{name} falls to the ground. "
 	end
 end
 
+# Swing determines whether a swing connects (2/3 chance)
 def swing
 	rand(3) > 0
 end
 
+# Release 2 - Use the class in a program
 # Main
 puts "Welcome to the Arena!"
 puts
@@ -92,7 +97,7 @@ else
 	end
 end
 
-## The Arena
+## Just for fun - The Arena
 
 # Initialize player stats
 player_health = 100
