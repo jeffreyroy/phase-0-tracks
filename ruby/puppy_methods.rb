@@ -30,7 +30,7 @@ class Kitten
   def meow
   	puts "Meow!"
   end
-  def catch(rodent)
+  def catch_a(rodent)
   	puts "The kitten caught a #{rodent}!"
   end
 end
@@ -45,7 +45,7 @@ fido.chase_tail
 
 felix = Kitten.new
 felix.meow
-felix.catch("mouse")
+felix.catch_a("mouse")
 
 # Create 50 kittens
 kitten_list=[]
@@ -56,5 +56,5 @@ end
 # Loop over 50 kittens
 kitten_list.each do |a_kitten|
 	a_kitten.meow
-	a_kitten.catch("rat")
+	a_kitten.catch_a("rat")
 end
