@@ -19,7 +19,7 @@ function reverse(aString) {
 }
 
 //  Driver code
-elloh = reverse("Hello")
+var elloh = reverse("Hello");
 if(1 == 1 || 1 > 2) {
 	console.log(elloh);
 }
