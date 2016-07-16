@@ -24,6 +24,7 @@ function longest(stringArray) {
 	var result = "";
 	for (var i=0; i<l; i++) {
 		if (stringArray[i].length > result.length) {
+			// If longest, change result to current element
 			result = stringArray[i];
 		}
 	}
@@ -51,10 +52,8 @@ function keyMatch(obj1, obj2) {
 	// Loop through keys in both objects to see if we find a key match
 	for(var property in obj1) {
 		if(property in obj2) {
-
 			// If keys match, check for value match
 			if(obj1[property] == obj2[property]) {
-
 				return true;
 			}
 		}
@@ -108,10 +107,13 @@ function wordArray(n) {
 }
 
 // Driver code
+
+// Test longest word
 console.log(longest(["long phrase","longest phrase","longer phrase"]));
 console.log(longest(["small", "tiny", "supercalifragilisticexpialidocious", "short"]));
 console.log(longest([]));
 
+// Test key-value match
 var johnDoe = {
 	firstName: "John",
 	middleName: "A",
@@ -130,8 +132,7 @@ console.log(keyMatch(johnDoe, richardRoe));
 johnDoe.age = 55;
 console.log(keyMatch(johnDoe, richardRoe));
 
-
-
+// Test random words
 var testArray
 for(var i=1; i<=10; i++) {
 	testArray = wordArray(3);
