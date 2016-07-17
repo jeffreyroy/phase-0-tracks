@@ -20,3 +20,22 @@ if(colors.length == names.length) {
   }
 }
 console.log(horseColor.ManOWar);
+
+function Car(make, model, color) {
+  this.make = make;
+  this.model = model;
+  this.color = color;
+  this.rev = function() {
+    console.log("Vrooom!");
+  }
+}
+
+var rachelsCar = new Car("toyota", "matrix", "blue");
+rachelsCar.rev();
+
+var jeffsCar = new Car("geo", "prism", "white");
+jeffsCar.rev();
+console.log(jeffsCar.color);
+
+var bondsCar = new Car("aston martin", "DBS", "silver");
+console.log(bondsCar.make);
