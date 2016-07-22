@@ -21,7 +21,7 @@ id|name|house_id|plays_quidditch|id|name|head
 3|Draco Malfoy|4|true|4|Slytherin|Horace Slughorn
 4|Cedric Diggory|2|true|2|Hufflepuff|Pomona Sprout
 
-sqlite> SELECT students.name, houses.name FROM students, houses WHERE students.house_id=houses.id;
+sqlite> SELECT students.name, houses.name FROM students JOIN houses ON students.house_id=houses.id;
 name|name
 Harry Potter|Gryffindor
 Hermione Granger|Gryffindor
@@ -34,3 +34,29 @@ id|name|house_id|plays_quidditch
 1|Harry Potter|1|true
 2|Hermione Granger|1|false
 3|Draco Malfoy|4|true
+
+sqlite> SELECT students.name, houses.name FROM students LEFT OUTER JOIN houses on students.house_id=houses.id;
+name|name
+Harry Potter|Gryffindor
+Hermione Granger|Gryffindor
+Draco Malfoy|Slytherin
+
+sqlite> SELECT students.name, houses.head FROM students JOIN houses ON students.house_id=houses.id AND students.plays_quidditch="true";
+name|head
+Harry Potter|Minerva McGonagall
+Draco Malfoy|Horace Slughorn
+
+sqlite> SELECT students.name, houses.name FROM students CROSS JOIN houses;
+name|name
+Harry Potter|Gryffindor
+Harry Potter|Hufflepuff
+Harry Potter|Ravenclaw
+Harry Potter|Slytherin
+Hermione Granger|Gryffindor
+Hermione Granger|Hufflepuff
+Hermione Granger|Ravenclaw
+Hermione Granger|Slytherin
+Draco Malfoy|Gryffindor
+Draco Malfoy|Hufflepuff
+Draco Malfoy|Ravenclaw
+Draco Malfoy|Slytherin
