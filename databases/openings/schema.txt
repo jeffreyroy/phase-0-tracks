@@ -1,0 +1,13 @@
+Positions
+ID INT PRIMARY KEY = unique identifier for this position
+NAME VARCHAR = name of position
+ECO VARCHAR = Encyclopedia of Chess Openings code
+WHITE_TO_MOVE = boolean (true if it's white's move, false if black's move)
+
+Moves
+ID INT PRIMARY KEY = unique identifier for this move
+FROM_ID INT = position in which this move is being made (link to positions.id)
+TO_ID INT = resulting position after making this move (link to positions.id)
+MOVE VARCHAR = chess move in standard chess notation
+
+
