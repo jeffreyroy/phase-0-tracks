@@ -1,0 +1,36 @@
+sqlite> SELECT * FROM houses;
+id|name|head
+1|Gryffindor|Minerva McGonagall
+2|Hufflepuff|Pomona Sprout
+3|Ravenclaw|Filius Flitwick
+4|Slytherin|Severus Snape
+
+sqlite> SELECT * FROM students;
+id|name|house_id|plays_quidditch
+1|Harry Potter|1|true
+2|Hermione Granger|1|false
+3|Draco Malfoy|4|true
+4|Cedric Diggory|2|true
+
+sqlite> UPDATE houses SET head="Horace Slughorn" WHERE name="Slytherin";
+
+sqlite> SELECT * FROM students, houses WHERE students.house_id=houses.id;
+id|name|house_id|plays_quidditch|id|name|head
+1|Harry Potter|1|true|1|Gryffindor|Minerva McGonagall
+2|Hermione Granger|1|false|1|Gryffindor|Minerva McGonagall
+3|Draco Malfoy|4|true|4|Slytherin|Horace Slughorn
+4|Cedric Diggory|2|true|2|Hufflepuff|Pomona Sprout
+
+sqlite> SELECT students.name, houses.name FROM students, houses WHERE students.house_id=houses.id;
+name|name
+Harry Potter|Gryffindor
+Hermione Granger|Gryffindor
+Draco Malfoy|Slytherin
+Cedric Diggory|Hufflepuff
+
+sqlite> DELETE FROM students WHERE name="Cedric Diggory";
+sqlite> SELECT * FROM students;
+id|name|house_id|plays_quidditch
+1|Harry Potter|1|true
+2|Hermione Granger|1|false
+3|Draco Malfoy|4|true
