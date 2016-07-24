@@ -2,6 +2,8 @@
 
 require 'sqlite3'
 
+## Methods
+
 # Search for a key with a string value and return corresponding id
 def find_string(db, table, key, string)
 	id_array = db.execute("SELECT id FROM #{table} WHERE #{key}=\"#{string}\"")
@@ -12,7 +14,7 @@ def find_string(db, table, key, string)
 		return nil
 	end
 	if id_array.length > 1
-		puts "ERROR!  Multiple matches for key #{key} and value '#{string}'!"
+		puts "ERROR!  Multiple matches for key #{key} and value \"#{string}\"!"
 		return nil
 	end
 	# If string is found, return its id
@@ -70,12 +72,15 @@ def show_position(db, id, move_list)
 	# Display information
 	position_hash = position_array[0]
 	puts "Current opening:  #{position_hash["eco"]} - #{position_hash["name"]}"
-	puts "Moves so far: #{move_list.join(' ')}"
+	print "Moves so far: "
+	# puts {move_list.join(' ')
+	display_moves(move_list)
+	puts
 	known_move_array = db.execute("SELECT move FROM moves WHERE from_id=#{id}")
 	if known_move_array.empty?
 		puts "No moves known from this position."
 	else
-		puts "Known moves from this position:"
+		puts "Known moves for #{cur_player(db, id)} from this position:"
 		known_move_array.each do |cur_move|
 			puts cur_move["move"]
 		end
@@ -86,7 +91,7 @@ end
 # attempts to locate a given move in the database
 # returns id if found, otherwise returns nil
 def find_move(db, position_id, move)
-	try_move = db.execute("SELECT id FROM moves WHERE from_id=#{position_id} AND move='#{move}'")
+	try_move = db.execute("SELECT id FROM moves WHERE from_id=#{position_id} AND move=\"#{move}\"")
 	# Check to see if given move from this position is already defined
 	# If not defined, return nil
 	if try_move.empty?
@@ -104,45 +109,101 @@ end
 # Allows user to enter a move or command
 # Should be updated to check whether move is legal
 # For now it accepts any input as a "move"
-def input_move
-	print "Enter a move in standard chess notation: "
+def input_move(db, cur_position)
+	print "Enter a move for #{cur_player(db, cur_position)} in standard chess notation, or HELP for help: "
 	move = gets.chomp.downcase
 	return move
 end
 
+# cur_player
+# Returns the name of the player whose move it is in cur_position
+def cur_player(db, cur_position)
+	whites_move = db.execute("SELECT white_to_move FROM positions WHERE id=#{cur_position}")
+	if whites_move[0]["white_to_move"] == "true"
+		return "white"
+	else
+		return "black"
+	end
+end
 
+# display_moves
+# Prints out the moves made so far in a user-friendly format
+def display_moves(move_list)
+	turns = (move_list.length + 1) / 2
+	if turns > 0
+		for count in 1..turns
+			print " #{count}."
+			print " #{move_list[2*count - 2]}"
+			if 2*count <= move_list.length
+				print " #{move_list[2*count - 1]}"
+			end
+		end
+	else
+		puts "(none)"
+	end
+end
 
-# open the openings database
+def display_help
+	puts
+	puts "To move through the openings explorer, enter a move in algebraic
+chess notation.  For example, enter e4 for white to move the King
+Pawn forward two spaces.  For piece moves, enter the abbreviation
+of the piece followed by the destination, e.g. Nf6 or Bg2.  For
+castling, enter 0-0 for castling on the King's side, and 0-0-0 for
+the Queen's side.
+
+You can also enter one of the following commands:
+HELP - displays this help file
+UNDO - undoes the last move entered
+QUIT - exits the program"
+end
+
+## Main
+
+# Initialize variables to begin at starting position
 db = SQLite3::Database.new("openings.db")
 db.results_as_hash = true
-
-cur_pos_id = find_max_id(db, "positions")
-
-cur_move_id = find_max_id(db, "moves")
-
-
-# Begin at starting position
 cur_position = 1
 move_list = []
+# Find maximum id numbers used in our database
+# We'll assign higher numbers to new positions to avoid duplicates
+cur_pos_id = find_max_id(db, "positions")
+cur_move_id = find_max_id(db, "moves")
+
+# Intro message
+puts "Welcome to the Chess Opening Explorer!
+
+This app allows you to learn about chess openings by entering
+a sequence of moves for white and black.  The app will tell you
+name of opening you've entered, and also the opening code from the
+Encyclopedia of Chess Openings (ECO).
+
+Moves should be entered in algebraic chess notation [see
+https://en.wikipedia.org/wiki/Algebraic_notation_(chess)].
+
+Enter HELP at any time for help."
 
 # main loop
 done = false
 while !done
 	puts
 	show_position(db, cur_position, move_list)
-	next_move = input_move
+	next_move = input_move(db, cur_position)
 	m = find_move(db, cur_position, next_move)
 	if next_move == "quit"
 		# Exit the program
 		done = true
+	elsif next_move == "help"
+		# Print out help file
+		display_help
 	elsif next_move == "undo"
 		# Undo a move
 		if move_list.empty?
-			puts "No moves have been made yet!"
+			puts "No moves to undo!"
 		else
 			move = move_list[-1]
 			# Find previous position
-			from_id_array = db.execute("SELECT from_id FROM moves WHERE to_id=#{cur_position} AND move='#{move}'")
+			from_id_array = db.execute("SELECT from_id FROM moves WHERE to_id=#{cur_position} AND move=\"#{move}\"")
 			if from_id_array.empty? || from_id_array.length > 1
 				puts "ERROR!  Can't find previous position!"
 			else
@@ -180,8 +241,8 @@ while !done
 				end
 				cur_pos_id += 1
 				cur_move_id += 1
-				db.execute("INSERT INTO positions (id, name, eco, white_to_move) VALUES (#{cur_pos_id}, '#{name}', '#{eco}', '#{whites_move_now}')")
-				db.execute("INSERT INTO moves (id, from_id, to_id, move) VALUES (#{cur_move_id}, #{cur_position}, #{cur_pos_id}, '#{next_move}')")
+				db.execute("INSERT INTO positions (id, name, eco, white_to_move) VALUES (#{cur_pos_id}, \"#{name}\", \"#{eco}\", \"#{whites_move_now}\")")
+				db.execute("INSERT INTO moves (id, from_id, to_id, move) VALUES (#{cur_move_id}, #{cur_position}, #{cur_pos_id}, \"#{next_move}\")")
 				move_list << next_move
 				cur_position = cur_pos_id
 			end
@@ -198,4 +259,4 @@ while !done
 	end
 end
 puts
-puts "Goodbye!"
+puts "Thanks for using the Openings Explorer!"
