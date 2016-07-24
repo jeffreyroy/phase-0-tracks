@@ -1,0 +1,9 @@
+Rooms
+id int = unique identifier for room
+name text = name of room
+desc text = description of room
+north int = identifier of room to north
+south int = identifier of room to south
+east int = identifier of room to east
+west int = identifier of room to west
+
