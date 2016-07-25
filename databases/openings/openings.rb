@@ -3,31 +3,12 @@
 require 'sqlite3'
 
 ## Methods
-=begin
-# Search for a key with a string value and return corresponding id
-def find_string(db, table, key, string)
-	id_array = db.execute("SELECT id FROM #{table} WHERE #{key}=\"#{string}\"")
-
-	# Check to see if given move from this position is already defined
-	# If not defined, return nil
-	if id_array.empty?
-		return nil
-	end
-	if id_array.length > 1
-		puts "ERROR!  Multiple matches for key #{key} and value \"#{string}\"!"
-		return nil
-	end
-	# If string is found, return its id
-	return id_array[0]["id"]
-end
-=end
 
 # return_value
 # finds record for given id, then returns value associated with key
 def return_value(db, table, id, key)
 	value_array = db.execute("SELECT #{key} FROM #{table} WHERE id=#{id}")
 
-	# Check to see if given move from this position is already defined
 	# If not defined, return nil
 	if value_array.empty?
 		return nil
@@ -75,7 +56,6 @@ def show_position(db, id, move_list)
 	puts "Current opening:  #{position_hash["eco"]} - #{position_hash["name"]}"
 	puts position_hash["comment"]
 	print "Moves so far: "
-	# puts {move_list.join(' ')
 	display_moves(move_list)
 	puts
 	known_move_array = db.execute("SELECT move FROM moves WHERE from_id=#{id}")
@@ -219,6 +199,7 @@ while !done
 		end
 
 	elsif !m
+		# If move not found, allow user to enter it as a new opening
 		puts "I don't know that move."
 		print "Do you want to enter it as a new move (y/n)? "
 		answer = gets.chomp.downcase
