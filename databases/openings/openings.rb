@@ -4,29 +4,11 @@ require 'sqlite3'
 
 ## Methods
 
-# Search for a key with a string value and return corresponding id
-def find_string(db, table, key, string)
-	id_array = db.execute("SELECT id FROM #{table} WHERE #{key}=\"#{string}\"")
-
-	# Check to see if given move from this position is already defined
-	# If not defined, return nil
-	if id_array.empty?
-		return nil
-	end
-	if id_array.length > 1
-		puts "ERROR!  Multiple matches for key #{key} and value \"#{string}\"!"
-		return nil
-	end
-	# If string is found, return its id
-	return id_array[0]["id"]
-end
-
 # return_value
 # finds record for given id, then returns value associated with key
 def return_value(db, table, id, key)
 	value_array = db.execute("SELECT #{key} FROM #{table} WHERE id=#{id}")
 
-	# Check to see if given move from this position is already defined
 	# If not defined, return nil
 	if value_array.empty?
 		return nil
@@ -72,8 +54,8 @@ def show_position(db, id, move_list)
 	# Display information
 	position_hash = position_array[0]
 	puts "Current opening:  #{position_hash["eco"]} - #{position_hash["name"]}"
+	puts position_hash["comment"]
 	print "Moves so far: "
-	# puts {move_list.join(' ')
 	display_moves(move_list)
 	puts
 	known_move_array = db.execute("SELECT move FROM moves WHERE from_id=#{id}")
@@ -165,10 +147,11 @@ db = SQLite3::Database.new("openings.db")
 db.results_as_hash = true
 cur_position = 1
 move_list = []
+
 # Find maximum id numbers used in our database
+# We need to assign position ids by hand for tracking purposes
 # We'll assign higher numbers to new positions to avoid duplicates
 cur_pos_id = find_max_id(db, "positions")
-cur_move_id = find_max_id(db, "moves")
 
 # Intro message
 puts "Welcome to the Chess Opening Explorer!
@@ -216,6 +199,7 @@ while !done
 		end
 
 	elsif !m
+		# If move not found, allow user to enter it as a new opening
 		puts "I don't know that move."
 		print "Do you want to enter it as a new move (y/n)? "
 		answer = gets.chomp.downcase
@@ -226,23 +210,26 @@ while !done
 			name = gets.chomp
 			print "Enter the ECO code for this opening, if known: "
 			eco = gets.chomp
+			puts "Enter a short comment about this opening (or press enter to leave blank):"
+			comment = gets.chomp
 			puts
 			puts "I'm about to create a new entry for the move #{next_move}."
 			puts "The opening will be #{eco} - #{name}."
+			puts comment
 			print "Are you sure you want to proceed (y/n)?"
 			answer = gets.chomp.downcase
 			if answer == "y"
-				# Create dabase entries
+				# Figure out whose move it is
 				whites_move_before = return_value(db, "positions", cur_position, "white_to_move")
 				if whites_move_before == "true"
 					whites_move_now = "false"
 				else
 					whites_move_now = "true"
 				end
+				# Create new database entry
 				cur_pos_id += 1
-				cur_move_id += 1
-				db.execute("INSERT INTO positions (id, name, eco, white_to_move) VALUES (#{cur_pos_id}, \"#{name}\", \"#{eco}\", \"#{whites_move_now}\")")
-				db.execute("INSERT INTO moves (id, from_id, to_id, move) VALUES (#{cur_move_id}, #{cur_position}, #{cur_pos_id}, \"#{next_move}\")")
+				db.execute("INSERT INTO positions (id, name, eco, white_to_move, comment) VALUES (#{cur_pos_id}, \"#{name}\", \"#{eco}\", \"#{whites_move_now}\", \"#{comment}\")")
+				db.execute("INSERT INTO moves (from_id, to_id, move) VALUES (#{cur_position}, #{cur_pos_id}, \"#{next_move}\")")
 				move_list << next_move
 				cur_position = cur_pos_id
 			end
