@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>jQuery Test Page</title>
+	<link rel="stylesheet" type="text/css" href="jquery.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body>
+	<header>
+		<h1>jQuery Test Page</h1>
+	</header>
+	<p>Click Pikachu to catch him!</p>
+	<div id="frame" class="big" style="top:200px;left:400px;">
+	<img src="pikachu.png" id="pik" class="big">
+	<div id="nclick" class="clicker" style="top:0px;left:43px;">
+	</div>
+	<div id="sclick" class="clicker" style="bottom:0px;left:43px;">
+	</div>
+	<div id="wclick" class="clicker" style="left:0px;top:40px;">
+	</div>
+	<div id="eclick" class="clicker" style="right:0px;top:40px;">
+	</div>
+	<div id="nwclick" class="clicker" style="top:0px;left:0px;">
+	</div>
+	<div id="swclick" class="clicker" style="bottom:0px;left:0px;">
+	</div>
+	<div id="neclick" class="clicker" style="right:0px;top:0px;">
+	</div>
+	<div id="eclick" class="clicker" style="right:0px;bottom:0px;">
+	</div>
+	<div id="mclick" class="clicker" style="left:43px;top:40px;">
+	</div>
+
+	</div>
+
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$("#nclick").mouseenter(function(){
+			$("#frame").animate( {top: '+=100'});
+		})
+	}	);
+	$(document).ready(function() {
+		$("#sclick").mouseenter(function(){
+			$("#frame").animate( {top: '-=100'});
+		})
+	}	);
+	$(document).ready(function() {
+		$("#wclick").mouseenter(function(){
+			$("#frame").animate( {left: '+=100'});
+		})
+	}	);
+	$(document).ready(function() {
+		$("#eclick").mouseenter(function(){
+			$("#frame").animate( {left: '-=100'});
+		})
+	}	);
+	$(document).ready(function() {
+		$("#nwclick").mouseenter(function(){
+			$("#frame").animate( {top: '+=100', left: '+=100'});
+		})
+	}	);
+	$(document).ready(function() {
+		$("#swclick").mouseenter(function(){
+			$("#frame").animate( {top: '-=100', left: '+=100'});
+		})
+	}	);
+	$(document).ready(function() {
+		$("#neclick").mouseenter(function(){
+			$("#frame").animate( {top: '+=100', left: '-=100'});
+		})
+	}	);
+	$(document).ready(function() {
+		$("#seclick").mouseenter(function(){
+			$("#frame").animate( {top: '-=100', left: '-=100'});
+		})
+	}	);
+	$(document).ready(function() {
+		$("#mclick").click(function(){
+			$("#frame").hide();
+			alert("Congratulations, you caught Pikachu!");
+		})
+	}	);
+	</script>
+</body>
+</html>
