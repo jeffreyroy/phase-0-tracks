@@ -51,6 +51,7 @@ get '/students/:id' do
   response
 end
 
+# Fake contact info
 get '/contact' do
   "Sherlock Holmes<br>
   221b Baker Street<br>
@@ -58,6 +59,7 @@ get '/contact' do
   United Kingdom<br>"
 end
 
+# Congratulate whoever reaches this page
 get '/great_job' do
   name = params[:name]
   response = "Good job"
@@ -68,12 +70,15 @@ get '/great_job' do
   response
 end
 
+# Add two numbers
 get '/add/:x/:y' do
   x = params[:x].to_i
   y = params[:y].to_i
   "#{x} + #{y} = #{x+y}"
 end
 
+# Search form
+# Allows search by full name only
 get '/search' do
   "<form action='result'>
   <p>Search for a student by name:</p>
@@ -82,6 +87,7 @@ get '/search' do
   </p>"
 end
 
+# Search result
 get '/result' do
   name=params[:name]
   students = db.execute("SELECT * FROM students WHERE name=?", name)
