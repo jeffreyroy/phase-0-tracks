@@ -4,12 +4,11 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Student Management System</h1>
-  <p>Welcome to the student management system.</p>
-  <p>Click <a href="students/new">here</a> to create a new student.</p>
+  <h1>Campus Search</h1>
+  <p>Following is a list of students at the <%= @campus_name[0]['city'] %> campus.</p>
   <ul>
     <% @students.each do |student| %>
-      <li><%= student['name'] %>, <%= student['campus'] %></li>
+      <li><%= student['name'] %>, <%= student['age'] %></li>
     <% end %>
   </ul>
 </body>
