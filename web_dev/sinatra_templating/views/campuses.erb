@@ -1,0 +1,15 @@
+<html>
+<head>
+  <title>Campuses</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Campus Search</h1>
+  <p>Following is a list of students at the <%= @campus_name[0]['city'] %> campus.</p>
+  <ul>
+    <% @students.each do |student| %>
+      <li><%= student['name'] %>, <%= student['age'] %></li>
+    <% end %>
+  </ul>
+</body>
+</html>

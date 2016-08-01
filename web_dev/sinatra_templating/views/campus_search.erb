@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search by campus</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<p>Choose a campus name to return a list of students at that campus.</p>
+	<br>
+  <form action="/campuses" method="GET">
+    <select name="campus">
+    	<% @campuses.each do |campus| %>
+    	<% p campus['abbreviation'] %>
+    	<option value="<%=campus['abbreviation'] %>"><%= campus['city'] %></option>
+    	<% end %>
+    </select>
+    <button type="submit">Search</button>
+  </form>
+  <br>
+  <hr>
+  <br>
+  <p>Don't see your campus?  Add one here.  Enter the city
+  name, and an abbrevation in caps (e.g. SF for San Francisco)<p>
+  <br>
+   <form action="/campuses/search" method="POST">
+    <input type="text" name="city" placeholder="City">
+    <input type="text" name="abbreviation" placeholder="Abbreviation">
+    <button type="submit">Save</button>
+  </form>
+</body>
+</html>
